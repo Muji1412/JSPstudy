@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+
+	
+	if(id.equals(pw)){
+		
+		Cookie cookie = new Cookie("userId", id); // 쿠키이름, 밸류임
+		cookie.setMaxAge(1800);
+		response.addCookie(cookie);
+		response.sendRedirect("cookie_ex01_welcome.jsp");
+		
+		//쿠키 생성
+	}else{
+		response.sendRedirect("cookie_ex01.jsp");
+	}
+	
+	
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

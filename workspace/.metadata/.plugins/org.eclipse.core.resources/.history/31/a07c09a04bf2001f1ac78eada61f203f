@@ -1,0 +1,82 @@
+package com.hr.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class DepartmentDAO {
+    // DAO 클래스는 여러 개 만들 필요 없이 객체가 한 개만 생성되도록 싱글톤 클래스로 생성
+
+    // 1. 나 자신의 객체 1개 생성
+    private static DepartmentDAO instance = new DepartmentDAO();
+
+    // 2. 외부에서 생성자를 호출할 수 없도록 private으로 막음
+    private DepartmentDAO() {
+        try {
+            InitialContext context = new InitialContext();
+            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/oracle");
+        } catch (Exception e) {
+            e.printStackTrace(); // 예외 출력 추가
+        }
+    }
+
+    // 3. 외부에서 객체를 요구할 때, instance를 반환함.
+    public static DepartmentDAO getInstance() {
+        return instance;
+    }
+
+    // 커넥션 풀 사용할 데이터소스 클래스
+    private DataSource dataSource;
+
+    // 메서드로 Database에 접근해서 값을 처리.
+    // 부서 아이디를 받아서, 부서 정보를 반환하는 메서드
+    public DepartmentDTO getDepartmentInfo(String departmentId) {
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+
+        DepartmentDTO dto = new DepartmentDTO();
+
+        try {
+            // 커넥션 풀에서 커넥션 가져오기
+            conn = dataSource.getConnection();
+
+            // SQL 준비 및 실행
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, departmentId);
+
+            // 실행
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                // 1행에 대한 처리
+                String departmentName = rs.getString("department_name");
+                int managerId = rs.getInt("manager_id");
+                int locationId = rs.getInt("location_id");
+
+                dto.setDepartmentId(Integer.parseInt(departmentId));
+                dto.setDepartmentName(departmentName);
+                dto.setManagerId(managerId);
+                dto.setLocationId(locationId);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) conn.close();
+                if (pstmt != null) pstmt.close();
+                if (rs != null) rs.close();
+            } catch (Exception e2) {
+                e2.printStackTrace(); // 리소스 해제 중 예외 발생 시 로그 출력
+            }
+        }
+        return dto;
+    }
+}

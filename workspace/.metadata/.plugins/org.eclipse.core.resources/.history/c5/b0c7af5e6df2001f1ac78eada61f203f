@@ -1,0 +1,27 @@
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>값을 형변환해서 출력할때 셋중에 하나를 선택하면 됨(db, java, 화면)</h3>
+	
+	<h3>parseDate = 문자를 날짜로 형변환</h3>
+	
+	<!-- var 없이 parseDate 해주면 바로 값 출력, 변수 지정해주면 a 찍어줘야 출력함 -->
+	<fmt:parseDate var = "a" value = "2025/02/24" pattern = "yyyy/MM/dd"></fmt:parseDate>
+	${a }
+	
+	<h3>formatDate = 날짜형 </h3>
+	
+	<c:set var = "now"  value = "<%=new Date() %>"></c:set>
+	${now }
+
+</body>
+</html>

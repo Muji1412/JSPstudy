@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	// 앞에서 넘어온 국어, 수학점수 평균구함
+	// 평균이 60점 이상이면 석세스페이지 이동
+	
+	// name님의 평균 xx점 합격입니다 출력
+	
+	// 60점 미만이면 fail페이지 이동해서
+	// name님은 평균 xx점 불합격입니다 출력
+	
+	//조건 - 세션 사용 안함
+	
+	int koreanScore = (int)request.getAttribute("korean");
+	int mathScore = (int)request.getAttribute("math")	
+
+
+%>    
+    
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%=koreanScore %>
+	<%=mathScore %>
+
+</body>
+</html>

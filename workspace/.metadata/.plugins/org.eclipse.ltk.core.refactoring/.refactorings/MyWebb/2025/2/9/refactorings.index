@@ -1,0 +1,27 @@
+1740379298460	Rename resource 'index.html'
+1740379311093	Rename resource 'join.html'
+1740379320592	Rename resource 'login.html'
+1740379413135	Rename resource 'mypage.html'
+1740379418502	Rename resource 'notice_list.html'
+1740379420634	Rename resource 'notice_view.html'
+1740379422972	Rename resource 'notice_write.html'
+1740379427308	Rename resource 'program_list.html'
+1740379969747	Delete elements
+1740379978736	Delete elements
+1740382858085	Delete elements
+1740382861246	Move 3 resources to 'user'
+1740382882780	Move 3 resources to 'META-INF'
+1740382907488	Move 3 resources to 'notice'
+1740384144785	Delete elements
+1740384155786	Move 3 resources to 'user'
+1740384161320	Delete elements
+1740384166528	Move 3 resources to 'notice'
+1740385047327	Move 'index.jsp' to 'WEB-INF'
+1740385052859	Move 'index.jsp' to 'webapp'
+1740385080876	Move 'login.jsp' to 'user'
+1740443623730	Delete element
+1740443657327	Copy compilation unit
+1740443669975	Delete element
+1740444942737	Rename resource 'user'
+1740448405797	Rename package 'com.myweb.users'
+1740450990086	Delete element

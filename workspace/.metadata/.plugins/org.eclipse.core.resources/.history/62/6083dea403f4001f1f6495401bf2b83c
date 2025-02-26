@@ -1,0 +1,35 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package com.myweb.board.service;
+
+import com.myweb.board.model.BoardDTO;
+import com.myweb.board.model.NoticeBoard;
+import com.myweb.util.mybatis.MybatisUtil;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class BoardServiceImpl implements BoardService {
+    private SqlSessionFactory sqlSessionFactory = MybatisUtil.getSqlSessionFactory();
+
+    public BoardServiceImpl() {
+    }
+
+    public void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String regdate = request.getParameter("regdate");
+        String email = request.getParameter("email");
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        SqlSession sql = this.sqlSessionFactory.openSession(true);
+        NoticeBoard board = (NoticeBoard)sql.getMapper(NoticeBoard.class);
+        BoardDTO dto = new BoardDTO(0, email, title, content, regdate);
+        int result = board.regist(dto);
+        System.out.println("성공실패:" + result);
+    }
+}

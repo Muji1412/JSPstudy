@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="noticebo"/>
+			<item value="firstp"/>
+			<item value="action"/>
+			<item value="문의"/>
+			<item value="변경하기"/>
+			<item value="sysYn"/>
+			<item value="수정하기"/>
+			<item value="수정"/>
+			<item value="msg"/>
+			<item value="회원가입"/>
+			<item value="&lt;form action=&quot;joinForm.users&quot; class=&quot;appForm&quot;&gt;"/>
+			<item value=" "/>
+			<item value="로그인"/>
+			<item value="users"/>
+			<item value="join"/>
+		</list>
+		<list key="replacehistory">
+			<item value="snsYn"/>
+		</list>
+	</section>
+</section>

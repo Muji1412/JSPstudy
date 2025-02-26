@@ -1,0 +1,159 @@
+package com.myweb.users.service;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.myweb.users.model.UsersDAO;
+import com.myweb.users.model.UsersDTO;
+
+public class UsersServiceImpl implements UsersService {
+
+	@Override
+	public void join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		//값을 받음
+		String emailPrev = request.getParameter("email_prev");
+		String emailNext = request.getParameter("email_next");
+		String name = request.getParameter("name");
+		String pw = request.getParameter("pw");
+		String phone = request.getParameter("phone");
+		String gender = request.getParameter("gender");
+		String snsYn = request.getParameter("sys_yn");
+		if(snsYn == null) {
+			snsYn = "N";
+		}
+		String email = emailPrev + "@" + emailNext;
+		
+//		System.out.println(emailPrev);
+//		System.out.println(emailNext);
+//		System.out.println(name);
+//		System.out.println(pw);
+//		System.out.println(phone);
+//		System.out.println(gender);
+//		System.out.println(snsYn);
+		
+		//DAO객체생성
+		UsersDAO dao = UsersDAO.getInstance();
+		
+		int result = dao.idDuplicationCheck(email);
+		
+		if(result == 1) {
+			
+			//msg를 화면에 보냄
+			request.setAttribute("msg", "이미 존재하는 아이디입니다");
+			request.getRequestDispatcher("join.jsp").forward(request, response);
+			
+		} else {
+			UsersDTO dto = new UsersDTO(email, name, pw, phone, gender, snsYn, null);
+			dao.join(dto);
+			
+			//mvc2방식에서 리다이렉트는 다시 컨트롤러를 태워서 이동할 때 사용함
+			response.sendRedirect("login.users");
+			
+		}
+		
+		
+		
+		
+	}
+
+	
+	@Override
+	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		
+		UsersDAO dao = UsersDAO.getInstance();
+		UsersDTO dto = dao.login(id, pw);
+		
+		if(dto == null) { //아이디, 비밀번호가 틀린경우
+			request.setAttribute("msg", "아이디 비밀번호를 확인하세요");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			//현재 브라우저 세션은 request얻을수 있음
+			HttpSession session = request.getSession();
+			session.setAttribute("userDTO", dto);
+			
+			response.sendRedirect("../index.jsp");
+		}
+	}
+	
+	@Override
+	public void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		HttpSession session = request.getSession();
+		UsersDTO userDTO = (UsersDTO) session.getAttribute("userDTO");
+		String curEmail = userDTO.getEmail();
+		String pw = userDTO.getPw();
+		
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String phone = request.getParameter("phone");
+		String snsYN = request.getParameter("sms_yn");
+		
+		UsersDTO dto = new UsersDTO(curEmail, name, pw, phone, gender, snsYN, null);
+		
+		UsersDAO dao = UsersDAO.getInstance();
+		int a = dao.modify(curEmail,dto);
+	
+		if (a == 0) { // 성공...?
+			
+			// 성공 메세지 출력하는법
+			response.setContentType("text/html; charset=UTF-8");// 컨텐츠타입 선언
+			PrintWriter out = response.getWriter(); 			
+			out.println("<script>");							// 자바스크립트 선언
+			out.println("alert('정보 수정 완료');");				// alert로 메세지 생성
+			out.println("location.href='/MyWeb/index.jsp';");	// 이후 이어지는 페이지 넣어주고
+			out.println("</script>");							// 자바스크립트 끗
+			
+			
+			session.setAttribute("userDTO", dto);				
+//			response.sendRedirect("../index.jsp");
+			
+		}else {
+			request.getRequestDispatcher("mypage.jsp").forward(request, response);
+		}
+		
+	}
+	
+	@Override
+	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// delete from 테이블명 where 키 = ?
+		// 이메일은 세션에서
+		// 이메일을 얻어서 dao에서 삭제를 진행
+		// 성공시 메세지 띄우고 메인페이지 이동 + 세션삭제, 실패시에는 마이페이지 이동
+		
+		HttpSession session = request.getSession();
+		UsersDTO userDTO = (UsersDTO) session.getAttribute("userDTO");
+		String curEmail = userDTO.getEmail();
+		UsersDAO dao = UsersDAO.getInstance();
+		int result = dao.delete(curEmail);
+		if(result == 1) { // 성공 케이스 시작
+			
+			response.setContentType("text/html; charset=UTF-8");// 컨텐츠타입 선언
+			PrintWriter out = response.getWriter(); 			
+			out.println("<script>");							// 자바스크립트 선언
+			out.println("alert('삭제 성공');");					// alert로 메세지 생성
+			out.println("location.href='/MyWeb/index.jsp';");	// 이후 이어지는 페이지 넣어주고
+			out.println("</script>");							// 자바스크립트 끗
+			
+			session.invalidate();
+		} else { // 실패 케이스 시작
+			response.setContentType("text/html; charset=UTF-8");// 컨텐츠타입 선언
+			PrintWriter out = response.getWriter(); 			
+			out.println("<script>");							// 자바스크립트 선언
+			out.println("alert('삭제 실패');");					// alert로 메세지 생성
+			out.println("location.href='/MyWeb/mypage.jsp';");	// 이후 이어지는 페이지 넣어주고
+			out.println("</script>");	
+		} 
+		
+		
+	}
+}

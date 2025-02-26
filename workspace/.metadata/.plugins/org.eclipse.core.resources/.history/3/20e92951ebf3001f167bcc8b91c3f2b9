@@ -1,0 +1,25 @@
+package com.myweb.board.service;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class BoardServiceImpl implements BoardService{
+
+	@Override
+	public void regeist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String regdate = request.getParameter("regdate");
+		String email = request.getParameter("email");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		System.out.println(regdate);
+		System.out.println(email);
+		System.out.println(title);
+		System.out.println(content);
+	}
+
+}

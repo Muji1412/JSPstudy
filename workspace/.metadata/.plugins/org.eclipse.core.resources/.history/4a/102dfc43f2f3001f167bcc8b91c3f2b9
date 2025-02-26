@@ -1,0 +1,5 @@
+package com.myweb.util.mybatis;
+
+public class MybatisUtil {
+
+}

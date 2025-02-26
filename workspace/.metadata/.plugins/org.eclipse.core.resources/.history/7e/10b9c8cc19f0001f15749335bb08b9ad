@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String avg1 = (String) request.getParameter("avg");
+	int avg = Integer.parseInt(avg1);
+	String name = (String) request.getParameter("name");
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>fail페이지 출력</h3>
+	<%=name %>님의 평균은<%=avg %>점 불합격입니다.
+	
+
+</body>
+</html>

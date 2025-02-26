@@ -1,0 +1,49 @@
+1739942011316	Copy file
+1739942102976	Copy file
+1739942599781	Copy file
+1739942612605	Rename resource 'include_footer.jsp'
+1739942627308	Copy file
+1739942648328	Copy file
+1739942667031	Delete element
+1739942677547	Move 'include_header.jsp' to 'html'
+1739942684813	Move 'include_header.jsp' to 'jspincl'
+1739942697887	Rename resource 'include_header.jsp'
+1739942701244	Move 'include_header.jsp' to 'jspincl'
+1739946589380	Rename type 'MyServelt'
+1739946598058	Rename package 'com.servelt'
+1739949654758	Move 'META-INF' to 'request'
+1739949663670	Copy file
+1739949673906	Copy file
+1739949682945	Copy file
+1739949688796	Copy file
+1739949692036	Delete element
+1740011863731	Move 'req_post_ex01.jsp' to 'request'
+1740015851169	Move 'quiz02.jsp' to 'request'
+1740034545255	Rename resource 'cookie_set.jsp'
+1740034557098	Rename resource 'cookie_get.jsp'
+1740034561583	Rename resource 'cookie_set1.jsp'
+1740102049001	Move 'application.jsp' to 'application'
+1740105852785	Move 'error.jsp' to 'cookie'
+1740105856291	Move 'error.jsp' to 'error'
+1740105877447	Delete element
+1740105991745	Rename resource 'error_page.jsp'
+1740109040671	Copy file
+1740109041564	Copy file
+1740109046900	Rename resource 'send.jsp'
+1740109426574	Copy file
+1740109427504	Copy file
+1740109898829	Rename resource 'foward1.jsp'
+1740109902432	Rename resource 'foward2.jsp'
+1740109905579	Rename resource 'foward3.jsp'
+1740110335384	Move file
+1740115352819	Copy file
+1740115415370	Copy file
+1740115424576	Copy file
+1740115431321	Copy file
+1740116394218	Copy file
+1740120144652	Move 'quiz.jsp' to 'example'
+1740120420317	Rename resource 'istockphoto-1317323736-612x612.jpg'
+1740120422752	Rename resource 'monochrome-image-8598798_1280.jpg'
+1740120433501	Rename resource 'a.jpg'
+1740120437912	Rename resource 'a.png'
+1740124894700	Rename resource 'index02_ok.jsp'

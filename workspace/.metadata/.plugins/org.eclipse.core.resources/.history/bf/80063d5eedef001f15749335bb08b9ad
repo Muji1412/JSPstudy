@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//세션에 저장된 값 확인
+	 
+	String myid =(String)session.getAttribute("my_id"); //찾을 이름
+	String myName=(String)session.getAttribute("my_name");
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%=myid %><br>
+	<%=myName %>
+
+</body>
+</html>
